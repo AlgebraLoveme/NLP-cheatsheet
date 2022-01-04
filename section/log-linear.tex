@@ -1,0 +1,12 @@
+\section{Log-linear Models}
+
+\subsection*{Definition}
+$$p(y\mid x, \theta)  = \frac{\exp(\theta\cdot f(x,y))}{\sum_{y^\prime \in \mathcal{Y}}\exp(\theta\cdot f(x,y^\prime))}$$
+
+The gradient of MLE loss $L(\theta)=\sum_{n} \log p(y_n\mid x_n, \theta)$ is
+$\frac{\partial L(\theta)}{\partial \theta_k} = \sum_{n} f_k(x_n, y_n) - \sum_n \sum_{y^\prime} p(y^\prime\mid x_n, \theta)f_k(x_n, y^\prime)$, which is the observed ``feature count'' minus the expected ``feature count''.
+
+\subsection*{Exponential Family}
+$$p(x\mid \theta) = \frac{h(x)}{Z(\theta)} \exp(\theta\cdot \phi(x))$$
+
+It maximizes entropy under the constraint of a fixed expectation.

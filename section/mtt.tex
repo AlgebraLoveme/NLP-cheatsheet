@@ -1,0 +1,29 @@
+\section{Dependency Parsing using MTT}
+
+\subsection*{Goal} Construct dependency tree (DT) with syntactic relations, e.g., noun-modifier, determiner, etc. The additional root node should only have degree 1.
+
+\subsection*{Relation to context free grammar}
+CRF has no information about syntactic relation, DT has no information about constituency structure.
+
+\subsection*{Types} 
+(1) Projective DT: no crossing arcs. Algorithms are generally dynamic programming.
+(2) Non-Projective DT: crossing arcs. Algorithms use matrix-tree theorem (MTT).
+
+
+\subsection*{Edge-Factored Assumption targeted the difficulty}
+Assume $\score(t,w)$ is the product of edge scores (including the root edge).
+
+Define $A_{ij}=\exp(\score(i,j,w))$ be the edge score, $\rho_j = \exp(\score(j,w))$ be the root score. Then MTT says $Z=|L|$ for following $L$ which is $O(n^3)$:
+
+$$
+L_{i j}= \begin{cases}\rho_{j} & \text { if } i=1 \\ \sum_{i^{\prime}=1, i^{\prime} \neq j}^{n} A_{i^{\prime} j} & \text { if } i=j \\ -A_{i j} & \text { otherwise }\end{cases}
+$$
+
+\subsection*{Decoding the best DT}
+Equivalent to find the best directed spanning tree starting from root and the degree of root is 1. Greedy algorithms that work in undirected graph do not work.
+
+We apply Chu-Liu-Edmonds Algorithm which is $O(n^3)$:
+(1) Find the best \emph{incoming} edge for each vertex. 
+(2) Contract cycles to be a single node $c$ and reweight the \emph{incoming} edge to $c$ by adding the valid weights in $c$ if the edge is chosen. 
+(3) The graph now has a spanning tree. If the root constraint is not satisfied, reweight each \emph{outcoming} edge from root to $v$ by subtracting the weight of next best \emph{incoming} edge to $v$. Remove the lowest \emph{outcoming} edge from root and repeat step 3. 
+(4) Expand contract nodes by breaking cycles accordingly.

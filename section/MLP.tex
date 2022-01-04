@@ -1,0 +1,28 @@
+\section{Sentiment Analysis with MLP}
+
+\subsection*{Goal}
+
+Predict whether a sentence is positive or negative.
+
+\subsection*{Skip-gram Model (word2vec)}
+
+\begin{enumerate}
+    \item Preprocess: Given window size $k$ and corpus size $C$, find all pairs with a focus word $w$ and a context word $c$ which locates in the window centered around the focus word. The complexity is $O(k\cdot C)$.
+    \item The model: $p(c\mid w)=\frac{\exp(e_{\text{wrd}}(w)\cdot e_{\text{ctx}}(c))}{Z(w)}$. Each word has two different embedding: $e_{\text{wrd}}$ and $e_{\text{ctx}}$, either throw away $e_{ctx}$ or concatenate them. Estimated via MLE.
+\end{enumerate}
+
+\subsection*{Evaluation of embeddings}
+
+\begin{enumerate}
+    \item Word similarity: compare embedding similarity of similar words.
+    \item Word analogies: king - queen = man - woman.
+\end{enumerate}
+
+\subsection*{Pipeline of Sentiment Analysis}
+
+\begin{enumerate}
+    \item Preprocess: tokenization, stemming, stop word removal, etc.
+    \item Word embedding using some models.
+    \item Sentence embedding by pooling word embeddings: sum, mean, max, etc.
+    \item Run MLP on the sentence embedding which has a fixed size.
+\end{enumerate}
