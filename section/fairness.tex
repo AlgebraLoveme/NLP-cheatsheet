@@ -6,7 +6,7 @@ Consider bias in the labeling, sample selection, task, features, loss functions 
 
 \subsection*{Train-Test Mismatch}
 
-Problem: distribution mismatch between old and new data.
+Problem: distri mismatch btw old, new data.
 
 \subsubsection*{Unsupervised Adaption (no label of new data)}
 Importance sampling: $\E_{(x,y)\sim \mathcal{D}^{\text{new}}} l(y, f(x)) = \E_{(x,y)\sim \mathcal{D}^{\text{old}}} (\frac{\mathcal{D}^{\text{new}}(x,y)}{\mathcal{D}^{\text{old}}(x,y)}l(y,f(x)))$. Since $\frac{\mathcal{D}^{\text{new}}(x,y)}{\mathcal{D}^{\text{old}}(x,y)}$ is unknown, we could use approximations: $\Dist^{\text{new}} \propto \Dist^{\text{base}}p(s=0\mid x)$ and $\Dist^{\text{old}} \propto \Dist^{\text{base}}p(s=1\mid x)$. Therefore, $\frac{\mathcal{D}^{\text{new}}(x,y)}{\mathcal{D}^{\text{old}}(x,y)} = \frac{1}{p(s=1\mid x)}-1$. We can train a classifier to distinguish between old and new distribution and thus get the estimation of $p(s=1\mid x)$.

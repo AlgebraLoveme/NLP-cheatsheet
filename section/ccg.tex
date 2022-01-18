@@ -1,21 +1,33 @@
 \section{Semantic Parsing}
 
-\subsection*{Goal}
-Parse of meaning. Represented by logical form composed of variables, predicates, quantifiers and boolean. Example: $\forall p .(P e r s o n(p) \rightarrow \exists q .(P e r s o n(q)$
-$\wedge p \neq q \wedge \operatorname{Loves}(p, q)))$.
+\textbf{Goal}: Syntatic Representation => semantic representation. \\ Example: “Everybody loves someone else”: \\ (1) $ \forall p .(\mathrm{Person}(p) \rightarrow \exists q .(\mathrm{Person}(q) \wedge p \neq q \wedge \operatorname{Loves}(p, q)))$, \quad (2) $ \exists p .(\mathrm{Person}(p) \wedge \forall q .(\mathrm{Person}(q) \wedge p \neq q \rightarrow \operatorname{Loves}(q, p)))$
 
 \subsection*{Principle of Compositionality}
-The meaning of a complex expression is a function of
-the meanings of that expression's constituent parts.
+(Complex\_expression A).meaning $=$ $f($A.constituents.meanings$)$.
 
-\subsection*{Enriched lambda calculus to represent meanings}
-
-(1) Logical constants such as entities (e.g., ALEX) and relations (e.g., likes). 
-(2) Variables, which are undetermined objects, similar to free variables in lambda calculus.
-(3) Literals such as LIKES(ALEX, x), formed by applying relations to objects.
-(4) Logical terms built using literals with logical connectives (e.g., $\land$) and quantifiers (e.g., $\exists$).
-(5) lambda terms built using lambda operator.
-
+\subsection*{Enriched $\lambda$ calculus to represent meanings}
+\textbf{Computation rules}: $\alpha$\textbf{-conversion}: renaming, \\
+$\lambda x . \lambda y .(x((\lambda x . x \; x) y)) \rightarrow \lambda z . \lambda y .(z((\lambda x . x \; z) y))$. \\
+$\beta$\textbf{-reduction}: applying one lambda term to another, $\lambda y .(z((\lambda \mathbf{x} \cdot \mathbf{x} \; z) y)) \rightarrow \lambda y \cdot(z(z \;y))$.
+\vspace{-0.4cm}
 \begin{center}
     \includegraphics[width=\columnwidth]{img/semantic_representation.png}
 \end{center}
+\vspace{-0.5cm}
+\textit{The semantic form depends on the grammar and combination order.} 
+
+Derivation e.g.: "likes every dog".sem
+\vspace{-0.3cm}
+\begin{tiny}
+\begin{equation*}
+    \begin{aligned}
+        &=(\mathrm{``likes".sem \;``every dog".sem}) \\
+        &=(\lambda P \cdot \lambda Q \cdot Q(\lambda x \cdot P(\lambda y \cdot \operatorname{LIKES}(x, y))) \quad \lambda Q \cdot \forall x(\mathrm{DOG}(x) \Rightarrow Q(x))) \\
+        &=(\lambda P \cdot \lambda Q \cdot Q(\lambda t \cdot P(\lambda y \cdot \mathrm{LIKES}(t, y))) \quad \lambda Q \cdot \forall x(\mathrm{DOG}(x) \Rightarrow Q(x))) \\
+        &=\lambda Q \cdot Q(\lambda t \cdot(\lambda Q \cdot \forall x(\mathrm{DOG}(x) \Rightarrow Q(x)) \quad(\lambda y \cdot \operatorname{LIKES}(t, y)))) \\
+        &=\lambda Q \cdot Q(\lambda t \cdot(\forall x(\mathrm{DOG}(x) \Rightarrow((\lambda y \cdot \mathrm{LIKES}(t, y)) x)))) \\
+        &=\lambda Q \cdot Q(\lambda t \cdot(\forall x(\mathrm{DOG}(x) \Rightarrow \mathrm{LIKES}(t, x))))
+    \end{aligned}
+\end{equation*}
+\end{tiny}
+\vspace{-0.4cm}

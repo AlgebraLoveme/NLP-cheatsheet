@@ -1,24 +1,33 @@
 \section{Machine Translation with Transformer}
 
-\subsection*{Goal}
+\subsection*{Difference from Transliteration}
 
-Translate a sentence from a source language to the target language. The problem is that there are many correct translations.
+(1) many correct translations. (2) locality assumption (scores = $\sum_{\mathrm{arcs}}\mathrm{score}_{i}$) not reasonable.
 
 \subsection*{Seq2Seq Model}
 
-Basically a representation method: $z=\encoder(x)$ and $y\mid x \sim \decoder(z)$.
-We iteratively model $p(y_t\mid x, y_1, \dots, y_{t-1})$ because $p(y\mid x)=\prod_{t} p(y_t\mid x, y_1, \dots, y_{t-1})$.
-
-At inference time, the model first predicts $y_1$ by $p(y_1\mid x)$, then $y_2$ by $p(y_2\mid x, y_1)$ and more.
+A representation method: $z=\mathrm{encoder}(x)$ and $y\mid x \sim \mathrm{decoder}(z)$. 
+Local normalization: $p(y\mid x)=\prod_{t} p(y_t\mid x, y_1, \dots, y_{t-1})$.
+Iteratively predict on $p(y_t\mid x, y_1, \dots, y_{t-1})$.  
 
 For standard RNN, the decoder only receives one vector, causing information bottleneck.
 
 \subsection*{Attention Mechanism}
 
 \begin{center}
-    \includegraphics[width=.8\columnwidth]{img/attention.png}
+    \includegraphics[width=.6\columnwidth]{img/attention.png}
 \end{center}
-Standard attention: what information from encoder is relevant for decoding step $t$. Use the output of encoder as key and value and the output of decoder at current step as the query.
+\vspace{-0.5cm}
+$Q=W^{Q} X_Q$, $K=W^{K} X_K$,$V=W^{V} X_V$, 
 
-Self-attention: what information from inputs are relevant for encoding step $t$ or what
-information from (previous) outputs are relevant for decoding step $t$. Use only encoder's or decoder's output as key, query and value.
+$\mathrm{context}(Q, K, V)=\operatorname{softmax}\left( Q K^{T} / \sqrt{d_{k}}\right) V$
+
+Standard attention: $X_K=X_V=h^{\mathrm{en}}$,$X_Q=h^{\mathrm{dec}}$.
+
+Self-attention: $X_K=X_V=X_Q=h^{\mathrm{en}}$ or $h^{\mathrm{dec}}$.
+
+\subsection*{Decoding}
+
+Beam Search: pruned breadth-first search where the breadth is limited to size $k$.
+
+Sampling: sample according to the conditional distribution at each time step.

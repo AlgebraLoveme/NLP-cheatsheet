@@ -1,0 +1,19 @@
+\section{Axes of Modeling}
+
+\subsection*{Modeling Choosing}
+
+\begin{itemize}[itemsep=0pt,topsep=0pt, leftmargin=2pt, itemindent=5pt, labelwidth=5pt]
+    \item \textbf{Probabilistic}(Logistic reg) \textit{pros}: can utilize prob theory for learning; \textit{cons}: assumption (independence or noise distribution) unrealistic. \textbf{Non-probabilistic}(learned:SVM, perceptron, manual:CFG) \textit{pros}: interpretable \textit{cons}: not straightforward to quantify uncertainty.
+    \item \textbf{Generative} (N-gram, Markov RF, RNN): model the distribution of each class; \textbf{Discriminative}(CRF, RNN): model the decision boundary between classes.
+    \item \textbf{Locally Normalized} vs \textbf{Globally}.
+\end{itemize}
+
+
+
+
+
+\subsection*{Model selection}
+
+Use nested CV to:(1) prevent data leakage (2) check model stability.
+
+
