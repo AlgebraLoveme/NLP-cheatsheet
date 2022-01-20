@@ -1,12 +1,13 @@
-\section{Log-linear Models}
+\section{Probability and Log-linear Models}
+A \textbf{Random Variable} is function from outcome space $\Omega$ to value space $T$ (neither \textit{random} nor \textit{variable}). 
+\textbf{Axioms of Probability}: (1) Non-negative, (2) Sums to 1, (3) $p(A \cup B)=p(A) + p(B) - p(A\cap B)$.
+\subsection*{Log-linear Model}
+\textbf{Def}: $p(y| x, \theta)  = \frac{\exp(\mathbf{\theta}^{\top}\mathbf{f}(x,y))}{\sum_{y^\prime \in \mathcal{Y}}\exp(\mathbf{\theta}^{\top}\mathbf{f}(x,y^\prime)))}$.
 
-\subsection*{Definition}
-$$p(y\mid x, \theta)  = \frac{\exp(\theta\cdot f(x,y))}{\sum_{y^\prime \in \mathcal{Y}}\exp(\theta\cdot f(x,y^\prime))}$$
-
-The gradient of MLE loss $L(\theta)=\sum_{n} \log p(y_n\mid x_n, \theta)$ is
-$\frac{\partial L(\theta)}{\partial \theta_k} = \sum_{n} f_k(x_n, y_n) - \sum_n \sum_{y^\prime} p(y^\prime\mid x_n, \theta)f_k(x_n, y^\prime)$, which is the observed ``feature count'' minus the expected ``feature count''.
+MLE loss and its gradient: \\
+$L(\theta)=\sum_{n} \log p(y_n| x_n, \theta)$ \\
+$\partial_{\theta_k}L(\theta) = \sum_{n} \left( f_k(x_n, y_n) - \mathbb{E}_{y^{\prime}
+\sim \theta}f_k(x_n, y^\prime) \right) $.
 
 \subsection*{Exponential Family}
-$$p(x\mid \theta) = \frac{h(x)}{Z(\theta)} \exp(\theta\cdot \phi(x))$$
-
-It maximizes entropy under the constraint of a fixed expectation.
+$p(x|\theta) = h(x)\exp(\mathbf{\theta}^{\top} \mathbf{\phi}(x)) / {Z(\theta)}$ (canonical form), $\mathbf{\phi}(x)$ minimum sufficient if it is independent. \textbf{Maximum Entropy Explanation}: exponential family maximizes $J(p)=-\sum_{x \in X} p(x) \log p(x)$ with constrains (1) non-negativity (2) sum to 1, (3) $\mathbf{F}=\sum_{x \in \mathcal{X}} p(x) \phi_{k}(x)$.
