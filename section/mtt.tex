@@ -25,9 +25,11 @@ Chu-Liu-Edmonds Algo ($O(n^3)$, optimized to $O(n^2)$ by Tarjan): \quad
 (1) Find the best \emph{incoming} edge for each vertex. 
 (2) Contract cycles to be a single node $c$ and add  the weight of incomming edge to $c.n_{i}$ with $w(c.n_{i}\to c.n_{i+1})+\cdots$ until the last node in the circle. 
 (3) Continue contraction until $\mathcal{G}$ has a spanning tree. 
-\vspace{-0.6cm}
+
+\vspace{-0.4cm}
 \begin{center}
     \includegraphics[width=\columnwidth]{img/root-remove.png}
 \end{center}
 \vspace{-0.5cm}
+
 (4) Expand contract nodes by breaking cycles accordingly.

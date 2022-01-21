@@ -24,7 +24,7 @@ Each production rule has a generic non-negative weight. The weights of trees are
 
 \vspace{-0.4cm}
 $$p(t\mid s) = \frac{\exp(\text{score}(t))}{Z(s)}$$
-\vspace{-0.4cm}
+\vspace{-0.3cm}
 
 To avoid divergence of $Z(s)$ which could be caused by the infinite number of parsing trees, we can only look at trees in CNF because the CNF theorem says that for any grammar $G$, there is another grammar $G^\prime$ that accepts the same set of strings and is in CNF. The number of possible CNF parsing tree (each non-terminal symbol has two children and each terminal symbol has one leaf child) is $O(4^N)$, no longer infinite.
 

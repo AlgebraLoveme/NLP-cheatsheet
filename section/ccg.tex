@@ -14,20 +14,20 @@ $\beta$\textbf{-reduction}: applying one lambda term to another, $\lambda y .(z(
     \includegraphics[width=\columnwidth]{img/semantic_representation.png}
 \end{center}
 \vspace{-0.5cm}
-\textit{The semantic form depends on the grammar and combination order.} 
+\textit{The semantic form depends on the grammar and combination order.}
 
 Derivation e.g.: "likes every dog".sem
-\vspace{-0.3cm}
+\vspace{0.3cm}
 \begin{tiny}
-\begin{equation*}
-    \begin{aligned}
-        &=(\mathrm{``likes".sem \;``every dog".sem}) \\
-        &=(\lambda P \cdot \lambda Q \cdot Q(\lambda x \cdot P(\lambda y \cdot \operatorname{LIKES}(x, y))) \quad \lambda Q \cdot \forall x(\mathrm{DOG}(x) \Rightarrow Q(x))) \\
-        &=(\lambda P \cdot \lambda Q \cdot Q(\lambda t \cdot P(\lambda y \cdot \mathrm{LIKES}(t, y))) \quad \lambda Q \cdot \forall x(\mathrm{DOG}(x) \Rightarrow Q(x))) \\
-        &=\lambda Q \cdot Q(\lambda t \cdot(\lambda Q \cdot \forall x(\mathrm{DOG}(x) \Rightarrow Q(x)) \quad(\lambda y \cdot \operatorname{LIKES}(t, y)))) \\
-        &=\lambda Q \cdot Q(\lambda t \cdot(\forall x(\mathrm{DOG}(x) \Rightarrow((\lambda y \cdot \mathrm{LIKES}(t, y)) x)))) \\
-        &=\lambda Q \cdot Q(\lambda t \cdot(\forall x(\mathrm{DOG}(x) \Rightarrow \mathrm{LIKES}(t, x))))
-    \end{aligned}
-\end{equation*}
+    \begin{equation*}
+        \begin{aligned}
+             & =(\mathrm{``likes".sem \;``every dog".sem})                                                                                                                           \\
+             & =(\lambda P \cdot \lambda Q \cdot Q(\lambda x \cdot P(\lambda y \cdot \operatorname{LIKES}(x, y))) \quad \lambda Q \cdot \forall x(\mathrm{DOG}(x) \Rightarrow Q(x))) \\
+             & =(\lambda P \cdot \lambda Q \cdot Q(\lambda t \cdot P(\lambda y \cdot \mathrm{LIKES}(t, y))) \quad \lambda Q \cdot \forall x(\mathrm{DOG}(x) \Rightarrow Q(x)))       \\
+             & =\lambda Q \cdot Q(\lambda t \cdot(\lambda Q \cdot \forall x(\mathrm{DOG}(x) \Rightarrow Q(x)) \quad(\lambda y \cdot \operatorname{LIKES}(t, y))))                    \\
+             & =\lambda Q \cdot Q(\lambda t \cdot(\forall x(\mathrm{DOG}(x) \Rightarrow((\lambda y \cdot \mathrm{LIKES}(t, y)) x))))                                                 \\
+             & =\lambda Q \cdot Q(\lambda t \cdot(\forall x(\mathrm{DOG}(x) \Rightarrow \mathrm{LIKES}(t, x))))
+        \end{aligned}
+    \end{equation*}
 \end{tiny}
 \vspace{-0.4cm}
