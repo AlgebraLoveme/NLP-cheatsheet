@@ -8,7 +8,7 @@
 \subsection*{Enriched $\lambda$ calculus to represent meanings}
 \textbf{Computation rules}: $\alpha$\textbf{-conversion}: renaming, \\
 $\lambda x . \lambda y .(x((\lambda x . x \; x) y)) \rightarrow \lambda z . \lambda y .(z((\lambda x . x \; z) y))$. \\
-$\beta$\textbf{-reduction}: applying one lambda term to another, $\lambda y .(z((\lambda \mathbf{x} \cdot \mathbf{x} \; z) y)) \rightarrow \lambda y \cdot(z(z \;y))$.
+$\beta$\textbf{-reduction}: applying one lambda term to another, $\lambda y .(z((\lambda x. x \; z) y)) \rightarrow \lambda y.(z(z \;y))$.
 \vspace{-0.4cm}
 \begin{center}
     \includegraphics[width=\columnwidth]{img/semantic_representation.png}

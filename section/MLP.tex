@@ -2,10 +2,7 @@
 
 \subsection*{Skip-gram Model (word2vec)}
 \textbf{Preprocess}: Given window size $k$ and corpus size $C$, find all pairs with a focus word $w$ and a context word $c$ which locates in the window centered around the focus word. The complexity is $O(k\cdot C)$.\\
-\textbf{Model}: $p(c\mid w)=\frac{\exp(e_{\text{wrd}}(w)\cdot e_{\text{ctx}}(c))}{Z(w)}$. Each word has two different embedding: $e_{\text{wrd}}$ and $e_{\text{ctx}}$, either throw away $e_{ctx}$ or concatenate them with $e_{\text{wrd}}$ to form embeddings of dimensionality 2d. Estimated via MLE.
-
-\subsection*{Combined Bag Of Words (CBOW)}
-$\mathbf{e}(\mathbf{x})=\sum_{w \in x} \mathbf{e}(w)$
+\textbf{Model}: $p(c\mid w)=\frac{\exp(e_{\text{wrd}}(w)\cdot e_{\text{ctx}}(c))}{Z(w)}$. Each word has two different embedding: $e_{\text{wrd}}$ and $e_{\text{ctx}}$, either throw away $e_{ctx}$ or concatenate it with $e_{\text{wrd}}$ to form embeddings of dimensionality $2d$. Estimated via MLE.
 
 \subsection*{Evaluation of embeddings}
 Word similarity: compare embedding similarity of similar words. \\
