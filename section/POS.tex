@@ -6,7 +6,6 @@ $p(t | w) = \exp(\text{score}(t,w))/{Z(w)}$ for a tagging sequence $t$ and a sen
 \subsection*{Conditional Random Field (a.k.a. Log-Linear Models on Structure)}
 
 Idea: additively decomposable score function: $\text{score}(w,t) = \sum_{n=1}^{N} \text{score}(<t_{n-1}, t_n>, w)$.
-
 The normalizer can be computed by DP (semiring: $(R^+ \cup \{+\infty\}, +, \times, 0, 1)$): $Z(w) = \beta(w, t_0)$, where
 \vspace{-0.3cm}
 \begin{center}
@@ -29,4 +28,4 @@ Def: (1) $(A, \oplus, \bar{0})$ commutative monoid, (2) $(A, \otimes, \bar{1})$ 
 \vspace{-0.5cm}
 \subsection*{Structured Perceptron}
 
-The MLE loss for CRF is a softmax, so we add a temperature variable and take it to infinity, the loss becomes $\sum_i (\text{score}(t^i, w^i) - \max_{t^\prime} \text{score}(t^\prime, w^i))$. This is called structured perceptron.
+The MLE loss for CRF is a softmax, if we add a temperature variable and take it to infinity, the loss becomes $\sum_i (\text{score}(t^i, w^i) - \max_{t^\prime} \text{score}(t^\prime, w^i))\Rightarrow$ structured perceptron.
