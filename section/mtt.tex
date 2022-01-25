@@ -15,7 +15,7 @@ Assume $p(\mathbf{t} \mid \mathbf{w})=\frac{1}{Z} \prod_{(i \rightarrow j) \in \
 
 Def: edge score $A_{ij}=\exp(\score(i,j,w))$, root score $\rho_j = \exp(\score(j,w))$. \textbf{MTT} says $Z=|L|$ for following $L$ which is $O(n^3)$:
 \vspace{-0.3cm}
-$$L_{i j}= \begin{cases}-A_{i j} & \text { if } i \neq j \\ \rho_{j}+\sum_{k \neq i} A_{k j} & \text { otherwise }\end{cases}$$
+$$L_{i j}= \begin{cases}\rho_{j} & \text { if } i=1 \\ \sum_{i^{\prime}=1, i^{\prime} \neq j}^{n} A_{i^{\prime} j} & \text { if } i=j \\ -A_{i j} & \text { otherwise }\end{cases}$$
 \vspace{-0.3cm}
 
 \subsection*{Decoding the best DT}

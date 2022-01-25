@@ -12,8 +12,16 @@
 
 
 
-\subsection*{Model selection}
+\textbf{Model selection}: Use nested CV to:(1) prevent data leakage (2) check model stability.
 
-Use nested CV to:(1) prevent data leakage (2) check model stability.
+\subsection*{Statistical test} Reject $H_{0}$ iff $p$-value$<\alpha$. Power=$P(\mathrm{rej}\;H_0|H_1)$. 
 
+Multiple($K$) independent test $P(\exists\mathrm{FalseRej})=1-(1-\alpha)^K$. Bonferroni correction: new significance level $\alpha^{*}=\alpha / K$.
 
+\textbf{t-Test}: a parametric test.
+
+\textbf{McNemar’s test}: $H_{0}: p_{b}=p_{c}$, $H_{1}: p_{b}\neq p_{c}$ using single test set. $a=\#\{C_1\land C_2\}$, $b=\#\{R_1\land C_2\}$, $c=\#\{C_1\land R_2\}$, $d=\#\{R_1\land R_2\}$. test statistic ${(b-c)^{2}}/{b+c} \dot{\sim} \chi_{1}^{2}$ for both $b,c\geq 25$.
+
+\textbf{Permutation tests}: $H_{0}$: classifier same as random chance 1. Get original error $p^*$ on holdout dataset 2. For $k$ times, randomly permute labels and retrain get error $p_k$. 3. empirical p-value: $({\left|\left\{i: p_{i} \leq p^{*}\right\}\right|+1}) / ({k+1})$.
+
+\textbf{5x2cv paired t-test}: $H_{0}$: two classifiers perform samely on metric $p$ 1. For 5 times split dataset into 2 folds. For each fold $i$ fit both classifiers on one fold and get $p=p_{A}-p_{B}$ on the other. Estimate $\bar{p}=(p^{(1)}+p^{(2)})/2$,$s^{2}=(p^{(1)}-\bar{p})^{2}+(p^{(2)}-\bar{p})^{2}$. Test statistic ${p_{1}^{(1)}}/{\sqrt{\sum_{i=1}^{5} s_{i}^{2}/5}} \dot{\sim} t_{5}$.
